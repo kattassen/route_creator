@@ -38,15 +38,10 @@ function placeMarker(location) {
     marker.addListener('click', function() {
         infowindow.content = marker.title;
         infowindow.open(map, marker);
-        document.getElementById("formName").value = marker.title;
-        document.getElementById("formTts").value = marker.ttsText;
-        document.getElementById("formInfo").value = marker.text;
-        activeMarker = marker;
-        showCoord(marker);
+        markerSelect(marker);
     });
-    activeMarker = marker;
     markers.push(marker);
-    showCoord(marker);
+    markerSelect(marker);
 }
 }
 
@@ -105,7 +100,11 @@ function xmlElem(name, attributes, content, ind) {
     return xml;
 }
 
-function showCoord(marker) {
+function markerSelect(marker) {
+    activeMarker = marker;
+    document.getElementById("formName").value = marker.title;
+    document.getElementById("formTts").value = marker.ttsText;
+    document.getElementById("formInfo").value = marker.text;
     document.getElementById("lat").innerHTML = marker.getPosition().lat();
     document.getElementById("lon").innerHTML = marker.getPosition().lng();
     document.getElementById("rad").innerHTML = marker.rad;
