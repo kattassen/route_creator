@@ -5,7 +5,8 @@
 <script>
 var myCenter=new google.maps.LatLng(59.364699,17.964180);
 var activeMarker = null;
-
+var markers = [];
+    
 function initialize()
 {   
 var mapProp = {
@@ -19,8 +20,6 @@ var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 google.maps.event.addListener(map, 'click', function(event) {
    placeMarker(event.latLng);
 });
-
-var markers = [];
 
 var contentString = "BLAHA";
 
@@ -43,7 +42,7 @@ function placeMarker(location) {
         activeMarker = marker;
     });
     activeMarker = marker;
-    markers.push(marker);    
+    markers.push(marker);
 }
 }
 
@@ -60,11 +59,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    document.getElementById("genBtn").addEventListener('click',function () {
-        alert("An xml should be created... but is not implemented yet...");
+    document.getElementById("genBtn").addEventListener('click', function() {
+        var rootXml = '<?xml version="1.0"?>\n';
+        //alert(markers.length);
+        for (var i = 0; i < markers.length; i++) {
+            //alert(i);
+            rootXml += "<poi>\n";
+            rootXml += xmlElem("id", "", i);
+            rootXml += xmlElem("name", "", markers[i].title);
+            rootXml += xmlElem("tts", "", markers[i].ttlText);
+            rootXml += "</poi>\n";
+        }
+        alert(rootXml);
     });
+
+
 });
 
+function xmlElem(name, attributes, content) {
+    var xml;
+    var divider;
+    if (attributes === null || attributes === "") {
+        divider = "";
+    } else {
+        divider = " ";
+    }
+        
+    if (content === null) {
+        if (attributes === null)
+        xml = '<' + name + divider + attributes + '/>\n';
+    } else {
+        xml = '<' + name + divider + attributes + '>' + content + '</' + name + '>\n';
+    }
+    return xml;
+}
 </script>
 </head>
 
