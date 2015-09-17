@@ -9,40 +9,40 @@ var markers = [];
     
 function initialize()
 {   
-var mapProp = {
-  center:myCenter,
-  zoom:10,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
+    var mapProp = {
+        center:myCenter,
+        zoom:10,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
 
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    
-google.maps.event.addListener(map, 'click', function(event) {
-   placeMarker(event.latLng);
-});
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-var infowindow = new google.maps.InfoWindow({
-    content: ""
-});
-
-function placeMarker(location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        draggable: true,
-        map: map,
-        title: "",
-        text: "",
-        ttsText: "",
-        rad: 100,
+    google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(event.latLng);
     });
-    marker.addListener('click', function() {
-        infowindow.content = marker.title;
-        infowindow.open(map, marker);
+
+    var infowindow = new google.maps.InfoWindow({
+        content: ""
+    });
+
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            draggable: true,
+            map: map,
+            title: "",
+            text: "",
+            ttsText: "",
+            rad: 100,
+        });
+        marker.addListener('click', function() {
+            infowindow.content = marker.title;
+            infowindow.open(map, marker);
+            markerSelect(marker);
+        });
+        markers.push(marker);
         markerSelect(marker);
-    });
-    markers.push(marker);
-    markerSelect(marker);
-}
+    }
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
