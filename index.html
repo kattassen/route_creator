@@ -21,10 +21,8 @@ google.maps.event.addListener(map, 'click', function(event) {
    placeMarker(event.latLng);
 });
 
-var contentString = "BLAHA";
-
 var infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: ""
 });
 
 function placeMarker(location) {
@@ -38,6 +36,7 @@ function placeMarker(location) {
         rad: 100,
     });
     marker.addListener('click', function() {
+        infowindow.content = marker.title;
         infowindow.open(map, marker);
         document.getElementById("formName").value = marker.title;
         document.getElementById("formTts").value = marker.ttsText;
