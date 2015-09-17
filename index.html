@@ -35,6 +35,7 @@ function placeMarker(location) {
         title: "",
         text: "",
         ttsText: "",
+        rad: 100,
     });
     marker.addListener('click', function() {
         infowindow.open(map, marker);
@@ -42,9 +43,11 @@ function placeMarker(location) {
         document.getElementById("formTts").value = marker.ttsText;
         document.getElementById("formInfo").value = marker.text;
         activeMarker = marker;
+        showCoord(marker);
     });
     activeMarker = marker;
     markers.push(marker);
+    showCoord(marker);
 }
 }
 
@@ -96,6 +99,13 @@ function xmlElem(name, attributes, content) {
     }
     return xml;
 }
+
+function showCoord(marker) {
+    document.getElementById("lat").innerHTML = marker.getPosition().lat();
+    document.getElementById("lon").innerHTML = marker.getPosition().lng();
+    document.getElementById("rad").innerHTML = marker.rad;
+}
+
 </script>
 </head>
 
@@ -106,6 +116,11 @@ function xmlElem(name, attributes, content) {
         Name: <input type="text" name="Name" value="DADA" id="formName"><br>
         Info: <input type="text" name="Info" id="formInfo"><br>
         Text to speach: <input type="text" name="Tts" id="formTts"><br>
+        <div class="coord">
+            <div id="lat"></div>
+            <div id="lon"></div>
+            <div id="rad"></div>
+        </div>
         <button id="saveBtn">Save</button>
         <button id="genBtn">Generate</button>
     </div>
