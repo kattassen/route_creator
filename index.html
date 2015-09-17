@@ -33,12 +33,14 @@ function placeMarker(location) {
         draggable: true,
         map: map,
         title: "",
+        text: "",
         ttsText: "",
     });
     marker.addListener('click', function() {
         infowindow.open(map, marker);
         document.getElementById("formName").value = marker.title;
-        document.getElementById("formInfo").value = marker.ttsText;
+        document.getElementById("formTts").value = marker.ttsText;
+        document.getElementById("formInfo").value = marker.text;
         activeMarker = marker;
     });
     activeMarker = marker;
@@ -55,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         else {
             activeMarker.title = document.getElementById("formName").value;
-            activeMarker.ttsText = document.getElementById("formInfo").value;
-        }
+            activeMarker.text = document.getElementById("formInfo").value;
+            activeMarker.ttsText = document.getElementById("formTts").value;
+         }
     });
     
     document.getElementById("genBtn").addEventListener('click', function() {
@@ -102,6 +105,7 @@ function xmlElem(name, attributes, content) {
     <div id="inputForm">
         Name: <input type="text" name="Name" value="DADA" id="formName"><br>
         Info: <input type="text" name="Info" id="formInfo"><br>
+        Text to speach: <input type="text" name="Tts" id="formTts"><br>
         <button id="saveBtn">Save</button>
         <button id="genBtn">Generate</button>
     </div>
