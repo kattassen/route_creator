@@ -67,39 +67,41 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById("genBtn").addEventListener('click', function() {
         var rootXml = '<?xml version="1.0"?>\n';
-        //alert(markers.length);
+        rootXml += '<route>\n';
         for (var i = 0; i < markers.length; i++) {
-            //alert(i);
             rootXml += "<poi>\n";
-            rootXml += xmlElem("\tid", "", i);
-            rootXml += xmlElem("name", "", markers[i].title);
-            rootXml += xmlElem("text", "", markers[i].text);
-            rootXml += xmlElem("tts", "", markers[i].ttsText);
+            rootXml += xmlElem("id", "", i, 1);
+            rootXml += xmlElem("name", "", markers[i].title, 1);
+            rootXml += xmlElem("text", "", markers[i].text, 1);
+            rootXml += xmlElem("tts", "", markers[i].ttsText, 1);
             var lat = markers[i].getPosition().lat();
             var lon = markers[i].getPosition().lng();
             var rad = markers[i].rad;
-            rootXml += xmlElem("coord", "lat=" + lat + " lon=" + lon + " rad=" + rad, null);
+            rootXml += xmlElem("coord", "lat=" + lat + " lon=" + lon + " rad=" + rad, null, 1);
             rootXml += "</poi>\n";
         }
+        rootXml += '</route>'
         alert(rootXml);
     });
 
 
 });
 
-function xmlElem(name, attributes, content) {
+function xmlElem(name, attributes, content, ind) {
     var xml;
-    var divider;
+    var divider = " ";
+    var indent = ""
     if (attributes === null || attributes === "") {
         divider = "";
-    } else {
-        divider = " ";
     }
-        
+
+    for (var i = 0; i < ind; i++) {
+        indent += "\t";
+    }
     if (content === null) {
-        xml = '<' + name + divider + attributes + '/>\n';
+        xml = indent + '<' + name + divider + attributes + '/>\n';
     } else {
-        xml = '<' + name + divider + attributes + '>' + content + '</' + name + '>\n';
+        xml = indent + '<' + name + divider + attributes + '>' + content + '</' + name + '>\n';
     }
     return xml;
 }
