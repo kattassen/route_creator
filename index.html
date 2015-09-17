@@ -22,7 +22,7 @@ google.maps.event.addListener(map, 'click', function(event) {
 
 var markers = [];
 
-var contentString = 'BLAHA';
+var contentString = "BLAHA";
 
 var infowindow = new google.maps.InfoWindow({
     content: contentString
@@ -59,6 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
             activeMarker.ttlText = document.getElementById("formInfo").value;
         }
     });
+    
+    document.getElementById("genBtn").addEventListener('click',function () {
+        alert("An xml should be created... but is not implemented yet...");
+    });
 });
 
 </script>
@@ -70,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="inputForm">
         Name: <input type="text" name="Name" value="DADA" id="formName"><br>
         Info: <input type="text" name="Info" id="formInfo"><br>
-        <button id="saveBtn" type="button">Save</button>
+        <button id="saveBtn">Save</button>
+        <button id="genBtn">Generate</button>
     </div>
 
 </body>
