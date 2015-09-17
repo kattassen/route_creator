@@ -71,9 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
         for (var i = 0; i < markers.length; i++) {
             //alert(i);
             rootXml += "<poi>\n";
-            rootXml += xmlElem("id", "", i);
+            rootXml += xmlElem("\tid", "", i);
             rootXml += xmlElem("name", "", markers[i].title);
+            rootXml += xmlElem("text", "", markers[i].text);
             rootXml += xmlElem("tts", "", markers[i].ttsText);
+            var lat = markers[i].getPosition().lat();
+            var lon = markers[i].getPosition().lng();
+            var rad = markers[i].rad;
+            rootXml += xmlElem("coord", "lat=" + lat + " lon=" + lon + " rad=" + rad, null);
             rootXml += "</poi>\n";
         }
         alert(rootXml);
@@ -92,7 +97,6 @@ function xmlElem(name, attributes, content) {
     }
         
     if (content === null) {
-        if (attributes === null)
         xml = '<' + name + divider + attributes + '/>\n';
     } else {
         xml = '<' + name + divider + attributes + '>' + content + '</' + name + '>\n';
