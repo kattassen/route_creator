@@ -33,12 +33,12 @@ function placeMarker(location) {
         draggable: true,
         map: map,
         title: "",
-        ttlText: "",
+        ttsText: "",
     });
     marker.addListener('click', function() {
         infowindow.open(map, marker);
         document.getElementById("formName").value = marker.title;
-        document.getElementById("formInfo").value = marker.ttlText;
+        document.getElementById("formInfo").value = marker.ttsText;
         activeMarker = marker;
     });
     activeMarker = marker;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         else {
             activeMarker.title = document.getElementById("formName").value;
-            activeMarker.ttlText = document.getElementById("formInfo").value;
+            activeMarker.ttsText = document.getElementById("formInfo").value;
         }
     });
     
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rootXml += "<poi>\n";
             rootXml += xmlElem("id", "", i);
             rootXml += xmlElem("name", "", markers[i].title);
-            rootXml += xmlElem("tts", "", markers[i].ttlText);
+            rootXml += xmlElem("tts", "", markers[i].ttsText);
             rootXml += "</poi>\n";
         }
         alert(rootXml);
