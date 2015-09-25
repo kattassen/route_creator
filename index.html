@@ -91,12 +91,12 @@ function xmlElem(name, attributes, content, ind) {
 
 function markerSelect(marker) {
     activeMarker = marker;
-    document.getElementById("formName").value = marker.title;
-    document.getElementById("formTts").value = marker.ttsText;
-    document.getElementById("formInfo").value = marker.text;
+    document.getElementById("formName").value = marker.info.title;
+    document.getElementById("formTts").value = marker.info.ttsText;
+    document.getElementById("formInfo").value = marker.info.text;
     document.getElementById("lat").innerHTML = marker.getPosition().lat();
     document.getElementById("lon").innerHTML = marker.getPosition().lng();
-    document.getElementById("rad").innerHTML = marker.rad;
+    document.getElementById("rad").innerHTML = marker.info.rad;
 }
 
 </script>
