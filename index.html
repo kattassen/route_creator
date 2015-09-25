@@ -30,13 +30,14 @@ function initialize()
             position: location,
             draggable: true,
             map: map,
-            title: "",
-            text: "",
-            ttsText: "",
-            rad: 100,
+            info: {
+                title: "",
+                text: "",
+                ttsText: "",
+                rad: 100},
         });
         marker.addListener('click', function() {
-            infowindow.content = marker.title;
+            infowindow.content = marker.info.title;
             infowindow.open(map, marker);
             markerSelect(marker);
         });
@@ -53,32 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("No selected marker");    
         }
         else {
-            activeMarker.title = document.getElementById("formName").value;
-            activeMarker.text = document.getElementById("formInfo").value;
-            activeMarker.ttsText = document.getElementById("formTts").value;
+            activeMarker.info.title = document.getElementById("formName").value;
+            activeMarker.info.text = document.getElementById("formInfo").value;
+            activeMarker.info.ttsText = document.getElementById("formTts").value;
          }
     });
     
     document.getElementById("genBtn").addEventListener('click', function() {
-        var rootXml = '<?xml version="1.0"?>\n';
-        rootXml += '<route>\n';
+        var rootXml = "";
         for (var i = 0; i < markers.length; i++) {
-            rootXml += "<poi>\n";
-            rootXml += xmlElem("id", "", i, 1);
-            rootXml += xmlElem("name", "", markers[i].title, 1);
-            rootXml += xmlElem("text", "", markers[i].text, 1);
-            rootXml += xmlElem("tts", "", markers[i].ttsText, 1);
-            var lat = markers[i].getPosition().lat();
-            var lon = markers[i].getPosition().lng();
-            var rad = markers[i].rad;
-            rootXml += xmlElem("coord", "lat=" + lat + " lon=" + lon + " rad=" + rad, null, 1);
-            rootXml += "</poi>\n";
+            rootXml += JSON.stringify(markers[i].info);
         }
-        rootXml += '</route>'
+
         alert(rootXml);
     });
-
-
 });
 
 function xmlElem(name, attributes, content, ind) {
