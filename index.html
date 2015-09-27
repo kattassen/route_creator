@@ -70,25 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function xmlElem(name, attributes, content, ind) {
-    var xml;
-    var divider = " ";
-    var indent = ""
-    if (attributes === null || attributes === "") {
-        divider = "";
-    }
-
-    for (var i = 0; i < ind; i++) {
-        indent += "\t";
-    }
-    if (content === null) {
-        xml = indent + '<' + name + divider + attributes + '/>\n';
-    } else {
-        xml = indent + '<' + name + divider + attributes + '>' + content + '</' + name + '>\n';
-    }
-    return xml;
-}
-
 function markerSelect(marker) {
     activeMarker = marker;
     document.getElementById("formName").value = marker.info.title;
