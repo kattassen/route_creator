@@ -5,7 +5,11 @@
 <script>
 var myCenter=new google.maps.LatLng(59.364699,17.964180);
 var activeMarker = null;
-var markers = [];
+
+var route = {
+    name : "",
+    markers : []
+};
     
 function initialize()
 {   
@@ -41,7 +45,7 @@ function initialize()
             infowindow.open(map, marker);
             markerSelect(marker);
         });
-        markers.push(marker);
+        route.markers.push(marker);
         markerSelect(marker);
     }
 }
@@ -62,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById("genBtn").addEventListener('click', function() {
         var rootXml = "";
-        for (var i = 0; i < markers.length; i++) {
-            rootXml += JSON.stringify(markers[i].info);
+        for (var i = 0; i < route.markers.length; i++) {
+            rootXml += JSON.stringify(route.markers[i].info);
         }
 
         alert(rootXml);
