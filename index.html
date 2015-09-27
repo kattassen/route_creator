@@ -39,6 +39,8 @@ function initialize()
                 text: "",
                 ttsText: "",
                 rad: 100},
+            // Function to resolve circular dependency
+            toJSON : function() { return this.info }
         });
         marker.addListener('click', function() {
             infowindow.content = marker.info.title;
@@ -66,12 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById("genBtn").addEventListener('click', function() {
-        var rootXml = "";
-        for (var i = 0; i < route.markers.length; i++) {
-            rootXml += JSON.stringify(route.markers[i].info);
-        }
-
-        alert(rootXml);
+        var rootJSON = "";
+        rootJSON += JSON.stringify(route);
+        alert(rootJSON);
     });
 });
 
