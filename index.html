@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("No selected marker");    
         }
         else {
+            route.name = document.getElementById("routeFormName").value;
             activeMarker.info.title = document.getElementById("formName").value;
             activeMarker.info.text = document.getElementById("formInfo").value;
             activeMarker.info.ttsText = document.getElementById("formTts").value;
@@ -91,16 +92,20 @@ function markerSelect(marker) {
     <div id="googleMap" style="width:100%;height:400px;"></div>
 
     <div id="inputForm">
-        Name: <input type="text" name="Name" value="DADA" id="formName"><br>
-        Info: <input type="text" name="Info" id="formInfo"><br>
-        Text to speach: <input type="text" name="Tts" id="formTts"><br>
-        <div class="coord">
-            <div id="lat"></div>
-            <div id="lon"></div>
-            <div id="rad"></div>
+        Name of route: <input type="text" name="RouteName" id="routeFormName"><br>
+        <hr>
+        <div id="POIForm">
+            Name of position: <input type="text" name="Name" id="formName"><br>
+            Info: <input type="text" name="Info" id="formInfo"><br>
+            Text to speach: <input type="text" name="Tts" id="formTts"><br>
+            <div class="coord">
+                <div id="lat"></div>
+                <div id="lon"></div>
+                <div id="rad"></div>
+            </div>
+            <button id="saveBtn">Save</button>
+            <button id="genBtn">Generate</button>
         </div>
-        <button id="saveBtn">Save</button>
-        <button id="genBtn">Generate</button>
     </div>
 
 </body>
