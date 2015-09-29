@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var rootJSON = "";
         rootJSON += JSON.stringify(route);
         alert(rootJSON);
+        saveRoute("SIMON2", rootJSON);
     });
 });
 
