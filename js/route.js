@@ -11,6 +11,7 @@ function initialize()
     var mapProp = {
         center:myCenter,
         zoom:10,
+        streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP
     };
 
