@@ -9,7 +9,16 @@ function saveRoute(name, json) {
             alert("success");
         },
         error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status == 0 || xhr.readyState == 0) {
                 alert("Server down?");
+            } else {
+                if (xhr.status == 409) {
+                    alert("Route already exists");
+                }
+                alert(xhr.status);
+                alert(textStatus);
+                alert(errorThrown);
+            }
         }
     })
     .done(function( data ) {
