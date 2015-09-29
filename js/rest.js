@@ -13,8 +13,14 @@ function saveRoute(name, json) {
     .done(function( data ) {
         console.log("done");
     })
-    .fail( function(xhr, textStatus, errorThrown) {
-        alert(xhr.responseText);
+
+    .fail(function(xhr, textStatus, errorThrown) {
+        //Prevent error on navigating from page
+        if (xhr.status == 0 || xhr.readyState == 0)
+            return;
+        else
+        alert(xhr.status);
         alert(textStatus);
+        alert(errorThrown);
     });
-});
+}
